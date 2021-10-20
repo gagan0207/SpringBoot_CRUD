@@ -25,14 +25,30 @@ public class DemoCrudApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception
     {
+        //GET all values
+        studentservice.getAllStdents()
+                .forEach(s1->log.info(s1.toString()));
+
+        //GET one value
         student s=studentservice.getStudentById(6) ;
         System.out.println(s.toString());
-        s.setLast_name("hedge");
-        studentservice.updateStdent(s);
 
+        //how to add values into db
+        studentservice.addstudent(new student("Ram","Charan","RC25@gmail.com"));
 
+        //Update values -> get the value first by using getStudentBYId() and
+        // set what u want to update and then use that method
+        student s1=studentservice.getStudentById(6) ;
+        s1.setLast_name("hedge");
+        studentservice.updateStdent(s1);
 
-        studentservice.getAllStdents().forEach(s1->log.info(s1.toString()));
+        //Delete value
+        studentservice.deletestudent(6);
+
+        studentservice.getAllStdents()
+                .forEach(s2->log.info(s2.toString()));
+
+        //just for checking whether all opertions are completed or not
         System.out.println("complete");
 
     }
